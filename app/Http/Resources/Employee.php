@@ -18,11 +18,12 @@ class Employee extends JsonResource
       foreach ( $this->divisions as $division ){
         array_push($divs, $division);
       }
+
       return [
         'id'          => $this->id,
         'first_name'  => $this->first_name,
         'last_name'   => $this->last_name,
-        /* 'divisions'   => $divs */
+        'divisions'   => $divs
       ];
     }
 }

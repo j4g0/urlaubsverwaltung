@@ -36,12 +36,9 @@ class EmployeeController extends Controller
       $employee->save();
 
       // Store respective divisions in pivot table
-      $division = Division::find([1,3]);
+      $division = Division::find($request->divisions);
       $employee->divisions()->attach($division);
 
-      /* if($employee->save()){ */
-      /*   return new EmployeeResource($employee); */
-      /* } */
       return "Success";
     }
 

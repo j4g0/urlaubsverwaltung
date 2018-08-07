@@ -13,4 +13,8 @@ class Employee extends Model
   public function vacations(){
     return $this->hasMany(Vacation::class);
   }
+
+  public function absences(){
+    return $this->hasMany(Absence::class);
+  }
 }

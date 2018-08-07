@@ -15,6 +15,8 @@ class DatabaseSeeder extends Seeder
         $this->call(EmployeeSeeder::class);
         $this->call(DivisionSeeder::class);
         $this->call(VacationSeeder::class);
+        $this->call(AbsenceTypeSeeder::class);
+        $this->call(AbsenceSeeder::class);
 
         // Populate division_employee pivot table
         $divisions = App\Division::all();

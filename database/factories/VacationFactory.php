@@ -4,7 +4,7 @@ use Faker\Generator as Faker;
 use Carbon\Carbon;
 
 $factory->define(App\Vacation::class, function (Faker $faker) {
-  // Generate vacation start and end date
+  // Generate vacation start date
   $year = rand(2016, 2018);
   $month = rand(1,12);
   $day = rand(1,28);

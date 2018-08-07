@@ -18,6 +18,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::apiResources([
-  'divisions' => 'API\DivisionController',
-  'employees' => 'API\EmployeeController'
+  'divisions'     => 'API\DivisionController',
+  'employees'     => 'API\EmployeeController',
+  'vacations'     => 'API\VacationController',
+  'absence_types' => 'API\AbsenceTypeController',
+  'absences'       => 'API\AbsenceController',
 ]);

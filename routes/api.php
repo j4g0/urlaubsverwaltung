@@ -13,14 +13,31 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'auth'
+
+], function ($router) {
+
+    Route::post('login', 'AuthController@login');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::post('me', 'AuthController@me');
+
 });
 
-Route::apiResources([
-  'divisions'     => 'API\DivisionController',
-  'employees'     => 'API\EmployeeController',
-  'vacations'     => 'API\VacationController',
-  'absence_types' => 'API\AbsenceTypeController',
-  'absences'       => 'API\AbsenceController',
-]);
+Route::middleware('auth:api')->group(function () {
+    Route::get('dashboard', function () {
+        return response()->json(['data' => 'Test Data']);
+    });
+
+    Route::apiResources([
+      'divisions'     => 'API\DivisionController',
+      'employees'     => 'API\EmployeeController',
+      'vacations'     => 'API\VacationController',
+      'absence_types' => 'API\AbsenceTypeController',
+      'absences'      => 'API\AbsenceController',
+    ]);
+});
+

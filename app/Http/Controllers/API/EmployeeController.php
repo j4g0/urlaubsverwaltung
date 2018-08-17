@@ -17,7 +17,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-      $employees = Employee::get();
+      $employees = Employee::get()->sortBy('last_name');
       return EmployeeResource::collection($employees);
     }
 
@@ -32,14 +32,17 @@ class EmployeeController extends Controller
       $employee = new Employee;
       $employee->first_name = $request->first_name;
       $employee->last_name = $request->last_name;
+      $employee->vacation_days = $request->vacation_days;
 
       $employee->save();
 
-      // Store respective divisions in pivot table
-      $division = Division::find($request->divisions);
-      $employee->divisions()->attach($division);
+      $employee->divisions()->attach($request->divisions);
 
-      return "Success";
+      // Store respective divisions in pivot table
+      /* $division = Division::find($request->divisions); */
+      /* $employee->divisions()->attach($division); */
+
+      return new EmployeeResource($employee);
     }
 
     /**
@@ -66,6 +69,9 @@ class EmployeeController extends Controller
       $employee = Employee::findOrFail($id);
       $employee->first_name = $request->first_name;
       $employee->last_name = $request->last_name;
+      $employee->vacation_days = $request->vacation_days;
+
+      $employee->divisions()->attach($request->divisions);
 
       if($employee->save()){
         return new EmployeeResource($employee);

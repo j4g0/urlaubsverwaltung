@@ -1,3 +1,5 @@
+import App from './App'
+import router from './routes.js'
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -18,5 +20,7 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
 const app = new Vue({
-    el: '#app'
+  el: '#app',
+  render: h => h(App),
+  router
 });
